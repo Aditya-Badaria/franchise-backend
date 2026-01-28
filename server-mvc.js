@@ -1,36 +1,38 @@
-var express=require("express");
-var fileuploader=require("express-fileupload");
-var mongoose=require("mongoose");
-var cors=require("cors");
-var path=require("path");
-// var dotenv=require("dotenv");
 require("dotenv").config();
-const Application = require("./models/applicationModel");
-var {url}=require ("./config/config");
 
-var app=express();
+const express = require("express");
+const fileuploader = require("express-fileupload");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
+const app = express();
+const PORT = process.env.PORT || 2004;
 
+// middleware
 app.use(cors());
 app.use(express.json());
-app.listen(2004,function(){
-    console.log("Server Started...");
-})
-
 app.use(express.urlencoded({ extended: true }));
 app.use(fileuploader());
 
+// console.log("USING MONGO URI:", process.env.MONGO_URI);
 
-var urll = url ;
-
-
-// Connect to MongoDB
-
-mongoose.connect(urll).then(()=>{
-    console.log("Connected");
-}).catch((err)=>{
-    console.log(err.message);
+// 🔥 CONNECT FIRST, THEN START SERVER
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
+  family: 4   // 🔥 FORCE IPv4
 })
+.then(() => {
+  console.log("MongoDB connected");
+  app.listen(PORT, () => {
+    console.log(`Server Started on port ${PORT}`);
+  });
+})
+.catch(err => {
+  console.error("MongoDB connection error:", err);
+});
+
+
+
 
 
 // Define the Application model
