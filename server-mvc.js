@@ -19,7 +19,6 @@ app.use(fileuploader());
 // 🔥 CONNECT FIRST, THEN START SERVER
 mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 5000,
-  family: 4   // 🔥 FORCE IPv4
 })
 .then(() => {
   console.log("MongoDB connected");
