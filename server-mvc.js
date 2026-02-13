@@ -5,6 +5,9 @@ const fileuploader = require("express-fileupload");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const Application = require("./models/applicationModel");
+// const auth = require("./middleware/auth");// Initialize Express app
+
 const app = express();
 const PORT = process.env.PORT || 2004;
 
