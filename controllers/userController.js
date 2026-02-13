@@ -217,6 +217,7 @@ function doSubmit(req, resp) {
 
 
     async function doLogin(req, resp) {
+        console.log("Login request body:", req.body);  // 👈 ADD HERE
     try {
         const { userId, password } = req.body;
 
