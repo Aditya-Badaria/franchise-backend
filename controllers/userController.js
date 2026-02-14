@@ -1,5 +1,5 @@
-var { getUserModel } = require("../models/userModel");
-var UserColRef = getUserModel();   // ✅ ADD THIS LINE
+const UserColRef = require("../models/userModel");
+
 
 // import { toast } from "react-toastify";
 const bcrypt = require('bcrypt');
